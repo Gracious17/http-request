@@ -36,7 +36,7 @@ const Page = () => {
   if (loading) return <h1>Fetching Users from json placeholder...</h1>;
   if (error) return <h1 className="text-xl text-red-500">{error}</h1>;
   return (
-    <div>
+    <div className="bg-black text-white ">
       {user.map((User) => {
         return (
           <>
@@ -48,7 +48,6 @@ const Page = () => {
               phone={User.phone}
               website={User.website}
             />
-            ;
           </>
         );
       })}
