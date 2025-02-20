@@ -1,55 +1,54 @@
 "use client";
 import UserCard from "@/component/UserCard";
-// import UserCard from "@/component/UserCard";
 import React, { useEffect, useState } from "react";
-type Users = {
+type User = {
   id: number;
-
   name: string;
   username: string;
   email: string;
   phone: string;
+  website: string;
 };
 const Page = () => {
-  const [users, setUser] = useState<Users[]>([]);
+  const [user, setUser] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  console.log(users);
-  //   https://jsonplaceholder.typicode.com/users
+  console.log(user);
+
   useEffect(() => {
-    async function fetchuser() {
+    async function fetchUsers() {
       try {
-        const res = await fetch(" https://jsonplaceholder.typicode.com/users");
-        if (!res.ok) throw new Error("unable to fetch");
+        const res = await fetch("https://jsonplaceholder.typicode.com/users");
+        if (!res) throw new Error("failed to fetch users");
         const data = await res.json();
         setUser(data);
       } catch (error) {
-        setError("Failed to fetch users!");
+        setError("fetching users failed");
         if (error instanceof Error) {
-          setError(`Fetching faild ${error.message}`);
+          setError(`unable to fetch  users `);
         }
       } finally {
         setLoading(false);
       }
     }
-    fetchuser();
+    fetchUsers();
   }, []);
-  if (loading) return <h1>Loading...</h1>;
-  if (error) return <h1>{error}</h1>;
-
+  if (loading) return <h1>Fetching Users from json placeholder...</h1>;
+  if (error) return <h1 className="text-xl text-red-500">{error}</h1>;
   return (
-    <div className="grid grid-rows-1   sm:grid items-center justify-center text-center">
-      {users.map((user) => {
+    <div>
+      {user.map((User) => {
         return (
           <>
             <UserCard
-              key={user.id}
-              name={user.name}
-              username={user.username}
-              phone={user.phone}
-              email={user.email}
-              id={user.id}
+              key={User.id}
+              name={User.name}
+              username={User.username}
+              email={User.email}
+              phone={User.phone}
+              website={User.website}
             />
+            ;
           </>
         );
       })}
