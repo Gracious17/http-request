@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 // import Button from "./Button";
 type ClickId = {
@@ -18,6 +19,11 @@ const UserCard = ({ name, username, email, phone, website }: ClickId) => {
       <p>Phone: {phone}</p>
       <p>Website: {website}</p>
       {/* <Button id={id} /> */}
+      <Link href="/">
+        <button className="p-5 bg-white font-bold border-2 text-black border-black">
+          Go Home
+        </button>
+      </Link>
     </div>
   );
 };
